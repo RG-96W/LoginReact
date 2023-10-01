@@ -15,16 +15,35 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const nome = document.getElementById('login__name').value;
-    const senha = document.getElementById('login__password').value;
+    const login = document.getElementById('login__name').value;
+    const password = document.getElementById('login__password').value;
 
     const formData = {
-      nome,
-      senha,
+      login,
+      password,
     };
 
     console.log(formData)
 
+    try {
+      const response = await fetch('http://localhost:5000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (response.ok) {
+        // Autenticação bem-sucedida, faça algo aqui
+        console.log('Autenticação bem-sucedida.');
+      } else {
+        // Autenticação falhou, exiba uma mensagem de erro
+        console.error('Falha na autenticação.');
+      }
+    } catch (error) {
+      console.error('Erro ao enviar a solicitação:', error);
+    }
   };
 
   
