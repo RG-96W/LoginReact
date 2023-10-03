@@ -3,6 +3,7 @@ import Button from '../components/Buttons'
 import Input from '../components/Input'
 import Label from '../components/Labels'
 import { Link } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 
 
@@ -11,6 +12,7 @@ import '../styles/LoginForm.css'
 
 
 const LoginForm = () => {
+  const [, setCookie] = useCookies(['token']);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,8 +37,11 @@ const LoginForm = () => {
       });
   
       if (response.ok) {
-        // Autenticação bem-sucedida, faça algo aqui
+        const data = await response.json();
+        // Salvando o token no cookie
+        setCookie('token', data.token, { path: '/' });
         console.log('Autenticação bem-sucedida.');
+        console.log(data.token)
       } else {
         // Autenticação falhou, exiba uma mensagem de erro
         console.error('Falha na autenticação.');
@@ -58,7 +63,7 @@ const LoginForm = () => {
         {/* <Label text="Cadastre-se!" id="login__label__password" tipo="detalhes" /> */}
         <Link to="/cadastro" className='link'>Cadastre-se!</Link>
         <div className="cont__column">
-          <Input type="text" id="login__password" />
+          <Input type="password" id="login__password" />
           <Label text="Senha" id="login__label__password" tipo="padrao" />
         </div>
 

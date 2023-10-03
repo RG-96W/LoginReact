@@ -59,13 +59,13 @@ try {
         </div>
 
         <div className="cont__column">
-          <Input type="text" id="cadastro__password" />
+          <Input type="password" id="cadastro__password" />
           <Label text="Senha" id="cadastro__label__password" tipo="padrao" />
         </div>
 
 
         <div className="cont__column">
-          <Input type="text" id="cadastro__repassword" />
+          <Input type="password" id="cadastro__repassword" />
           <Label text="Repita senha" id="cadastro__label__password" tipo="padrao" />
         </div>
 
