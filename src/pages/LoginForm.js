@@ -4,6 +4,8 @@ import Input from '../components/Input'
 import Label from '../components/Labels'
 import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
+
 
 
 
@@ -12,6 +14,7 @@ import '../styles/LoginForm.css'
 
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const [, setCookie] = useCookies(['token']);
 
   const handleSubmit = async (e) => {
@@ -42,6 +45,9 @@ const LoginForm = () => {
         setCookie('token', data.token, { path: '/' });
         console.log('Autenticação bem-sucedida.');
         console.log(data.token)
+
+
+        navigate('/login');
       } else {
         // Autenticação falhou, exiba uma mensagem de erro
         console.error('Falha na autenticação.');
